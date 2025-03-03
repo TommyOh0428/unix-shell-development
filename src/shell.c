@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-#include "../include/msg.h"
-#include "readline/readline.c"
+#include "../include/function.h"
+#include "readline/readline.h"
 
 #define BUFFER_SIZE 1024
 
@@ -45,6 +45,21 @@ int main() {
         if (command == NULL) {
             continue;
         }
+
+        int exit_status = exit_function(command);
+        if (exit_status == 1) {
+            break;
+        } else if (exit_status == -1) {
+            continue;
+        }
+
+        int pwd_status = pwd_function(command);
+        if (pwd_status == 1) {
+            continue;
+        } else if (pwd_status == -1) {
+            continue;
+        }
+
         child_pid = fork();
         if (child_pid == 0) {
             // child process

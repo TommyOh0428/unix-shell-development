@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include "readline.h"
 
 char **get_input(char *input) {
     char **command = malloc(8 * sizeof(char *));
